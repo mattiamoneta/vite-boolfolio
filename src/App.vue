@@ -1,11 +1,21 @@
-<script setup>
-import MainPage from './components/MainPage.vue'
+<script>
+import AppHeader from './components/AppHeader.vue';
+
+export default {
+  data() {
+    return {
+
+    }
+  },
+  components: {
+    AppHeader
+  }
+}
 </script>
 
 <template>
-  <MainPage />
+  <AppHeader />
+  <router-view></router-view>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -12,7 +12,11 @@
     "@popperjs/core": "^2.11.8",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
-    "vue": "^3.2.47"
+    "masonry-layout": "^4.2.2",
+    "sass": "^1.62.1",
+    "scss": "^0.2.4",
+    "vue": "^3.2.47",
+    "vue-router": "^4.2.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",

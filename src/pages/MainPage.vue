@@ -1,11 +1,9 @@
 <template>
     <div class="container">
 
+        <!-- data-masonry='{"percentPosition": true }' -->
         <div class="row justify-content-center">
-
             <ProjectCard v-for="(project) in retProjects.data" :arrProject="project" />
-
-
         </div>
 
         <div class="row my-5">
@@ -15,7 +13,8 @@
                         <li class="page-item"><button class="page-link" @click="getAllProjectsInPage(currentPage - 1)"
                                 :class="{ 'disabled': currentPage == 1 }">Previous</button></li>
                         <li v-for="elem in lastPage" :key="elem" class="page-item" @click="getAllProjectsInPage(elem)">
-                            <button class="page-link">{{ elem }}</button></li>
+                            <button class="page-link">{{ elem }}</button>
+                        </li>
                         <li class="page-item"><button class="page-link" @click="getAllProjectsInPage(currentPage + 1)"
                                 :class="{ 'disabled': currentPage >= lastPage }">Next</button></li>
                     </ul>
@@ -29,7 +28,8 @@
 <script>
 
 import axios from 'axios';
-import ProjectCard from './ProjectCard.vue';
+import ProjectCard from '../components/ProjectCard.vue';
+import { store } from '../store.js';
 
 export default {
     name: 'MainPage',
@@ -37,7 +37,8 @@ export default {
         return {
             retProjects: [],
             currentPage: 1,
-            lastPage: 0
+            lastPage: 0,
+            store
         }
     },
 
@@ -54,8 +55,6 @@ export default {
                     this.currentPage = providedPage;
                     this.lastPage = response.data.results.last_page;
                 })
-
-            console.log(this.lastPage);
         }
     },
     components: {
