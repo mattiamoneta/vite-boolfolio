@@ -11,6 +11,12 @@
                     <li class="nav-item">
                         <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link :to="{ name: 'contacts' }" class="nav-link">Contacts</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link :to="{ name: 'about' }" class="nav-link">About</router-link>
+                    </li>
                 </ul>
             </div>
         </div>
