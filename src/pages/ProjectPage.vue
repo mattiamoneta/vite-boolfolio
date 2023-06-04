@@ -6,8 +6,11 @@
 
                     <div class="row">
                         <div class="col-4">
-                            <img :src="`http://127.0.0.1:8000/storage/${this.retProject['thumb']}`" class="card-img-top"
+                            <img v-if="this.retProject['thumb']"
+                                :src="`http://127.0.0.1:8000/storage/${this.retProject['thumb']}`" class="card-img-top"
                                 alt="...">
+                            <img v-else="" src="http://127.0.0.1:8000/storage/user_uploads/notFound.png"
+                                class="card-img-top" alt="..." />
                         </div>
                         <div class="col-8">
                             <div class="card-body">
