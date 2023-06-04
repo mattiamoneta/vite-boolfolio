@@ -17,6 +17,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ retProject['name'] }}</h5>
                                 <p class="card-text">{{ retProject['description'] }}</p>
+                                <div v-if="retProject['type']" class="small fw-bold my-3">{{ retProject['type'].name }}</div>
                                 <div class="tags">
                                     <span class="badge rounded-pill text-bg-primary me-2"
                                         v-for="technology in retProject['technologies']">{{ technology['name'] }}</span>
