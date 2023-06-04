@@ -8,3 +8,4 @@ import "bootstrap"
 import "masonry-layout"
 
 createApp(App).use(router).mount('#app')
+
