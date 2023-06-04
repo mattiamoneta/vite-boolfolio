@@ -2,8 +2,9 @@
     <div class="container">
         <div class="row">
             <div class="col-8 mx-auto">
-                <div class="card">
 
+                <!-- Card -->
+                <div v-if="this.retProject" class="card">
                     <div class="row">
                         <div class="col-4">
                             <img v-if="this.retProject['thumb']"
@@ -25,6 +26,12 @@
                         </div>
                     </div>
                 </div>
+                <!-- End Card -->
+
+                <div v-else class="text-center my-5">
+                    <div class="text-muted mb-3"><i class="fa-solid fa-spinner fa-spin fa-2x"></i></div>
+                    <span class="fw-bold">Loading</span>
+                </div>
 
 
             </div>
@@ -41,7 +48,7 @@ export default {
 
     data() {
         return {
-            retProject: [],
+            retProject: null,
         }
     },
     methods: {
