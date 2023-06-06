@@ -13,17 +13,27 @@
                         <form @submit.prevent="sendEmail()">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Your Name</label>
-                                <input type="text" class="form-control" id="name" name="name" v-model="name">
+                                <input type="text" class="form-control" :class="{ 'is-invalid': errors.name }" id="name"
+                                    name="name" v-model="name">
+                                <div class="invalid-feedback">
+                                    Nome non valido
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" aria-describedby="email"
-                                    v-model="email">
+                                <input type="email" class="form-control" id="email" :class="{ 'is-invalid': errors.email }"
+                                    name="email" aria-describedby="email" v-model="email">
+                                <div class="invalid-feedback">
+                                    Email non valida
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="message" class="form-label">Messaggio</label>
                                 <input type="text" class="form-control" id="message" name="message"
-                                    aria-describedby="message" v-model="message">
+                                    aria-describedby="message" v-model="message" :class="{ 'is-invalid': errors.message }">
+                                <div class="invalid-feedback">
+                                    Messaggio non valido
+                                </div>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Send Mail</button>
@@ -46,12 +56,15 @@ export default {
             name: '',
             email: '',
             message: '',
-            success: false
+            success: false,
+            errors: {}
 
         }
     },
     methods: {
         sendEmail() {
+
+            this.errors = {};
 
             axios.post('http://localhost:8000/api/contacts', {
                 name: this.name,
@@ -62,11 +75,12 @@ export default {
                 if (response.data.success) {
                     this.name = "",
                         this.message = "",
-                        this.email = ""
-                    this.success = "true"
+                        this.email = "",
+                        this.success = true
+                } else {
+                    this.errors = response.data.errors;
+                    console.log(this.errors);
                 }
-
-                console.log(response);
             });
 
         }
