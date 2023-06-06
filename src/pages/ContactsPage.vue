@@ -4,6 +4,11 @@
             <div class="col-12 mx-auto">
                 <h1 class="text-center">Contacts</h1>
                 <div class="row my-5">
+                    <div class="col-10 mx-auto" v-if="success">
+                        <div class="alert alert-primary" role="alert">
+                            Messaggio Inviato!
+                        </div>
+                    </div>
                     <div class="col-10 mx-auto">
                         <form @submit.prevent="sendEmail()">
                             <div class="mb-3">
@@ -40,13 +45,29 @@ export default {
         return {
             name: '',
             email: '',
-            message: ' '
+            message: '',
+            success: false
 
         }
     },
     methods: {
         sendEmail() {
 
+            axios.post('http://localhost:8000/api/contacts', {
+                name: this.name,
+                email: this.email,
+                message: this.message
+            }).then(response => {
+
+                if (response.data.success) {
+                    this.name = "",
+                        this.message = "",
+                        this.email = ""
+                    this.success = "true"
+                }
+
+                console.log(response);
+            });
 
         }
 
