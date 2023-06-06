@@ -36,7 +36,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Send Mail</button>
+                            <button type="submit" class="btn btn-primary" :disabled="isSending">Send Mail</button>
                         </form>
                     </div>
                 </div>
@@ -57,7 +57,8 @@ export default {
             email: '',
             message: '',
             success: false,
-            errors: {}
+            errors: {},
+            isSending: false
 
         }
     },
@@ -65,6 +66,7 @@ export default {
         sendEmail() {
 
             this.errors = {};
+            this.isSending = true;
 
             axios.post('http://localhost:8000/api/contacts', {
                 name: this.name,
@@ -73,13 +75,16 @@ export default {
             }).then(response => {
 
                 if (response.data.success) {
-                    this.name = "",
-                        this.message = "",
-                        this.email = "",
-                        this.success = true
+                    this.name = "";
+                    this.message = "";
+                    this.email = "";
+                    this.success = true;
+                    this.isSending = false;
+
                 } else {
                     this.errors = response.data.errors;
                     console.log(this.errors);
+                    this.isSending = false;
                 }
             });
 
